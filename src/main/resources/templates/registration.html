@@ -1,4 +1,5 @@
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,35 +25,35 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="username">Username</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="firstName">First name</span>
                 </div>
-                <input type="text" class="form-control" placeholder="First name" aria-label="First name" aria-describedby="basic-addon1">
+                <input type="text" name="firstName" class="form-control" placeholder="First name" aria-label="First name" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="lastName">Last name</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" aria-describedby="basic-addon1">
+                <input type="text" name="lastName" class="form-control" placeholder="Last name" aria-label="Last name" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="email">E-Mail</span>
                 </div>
-                <input type="text" class="form-control" placeholder="E-Mail" aria-label="E-Mail" aria-describedby="basic-addon1">
+                <input type="text" name="email" class="form-control" placeholder="E-Mail" aria-label="E-Mail" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="password">Password</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                <input type="text" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
             </div>
             <div align="center">
-                <button type="submit" class="btn-primary btn-lg" onclick="location.href='/';">Registration</button>
-                <button type="submit" class="btn-primary btn-lg" onclick="location.href='/';">Cancel</button>
+                <button type="submit" class="btn-primary btn-lg" onclick="location.href='/login';">Registration</button>
+                <button type="button" class="btn-primary btn-lg" onclick="location.href='/';">Cancel</button>
 
             </div>
         </form>

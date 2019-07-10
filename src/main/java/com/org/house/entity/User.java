@@ -18,8 +18,9 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @UniqueElements
+    @Temporal(TemporalType.DATE)
     private Date date;
+    @UniqueElements
     private String email;
     private String firstName;
     private String lastName;
@@ -30,6 +31,8 @@ public class User implements UserDetails {
     private boolean isAccountNonExpired;
     private boolean isCredentialsNonExpired;
     @ElementCollection
+    @Enumerated(EnumType.STRING)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     private Collection<Role> authorities;
 
 }
