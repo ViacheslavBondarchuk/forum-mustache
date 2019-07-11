@@ -3,21 +3,10 @@ package com.org.house.entity;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.org.house.role.Role;
@@ -28,27 +17,29 @@ import lombok.Data;
 @Data
 @Entity
 @Builder
-@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }, name = "uk_email_users"))
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = {"username"}, name = "uk_username"))
 public class User implements UserDetails {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Temporal(TemporalType.DATE)
-	private Date date;
-	@Column(unique = true)
-	private String email;
-	private String firstName;
-	private String lastName;
-	private String username;
-	private String password;
-	private boolean isEnabled;
-	private boolean isAccountNonLocked;
-	private boolean isAccountNonExpired;
-	private boolean isCredentialsNonExpired;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    private String email;
+    private String firstName;
+    private String lastName;
+    @Column(unique = true)
+    private String username;
+    private String password;
+    private boolean isEnabled;
+    private boolean isAccountNonLocked;
+    private boolean isAccountNonExpired;
+    private boolean isCredentialsNonExpired;
 
-	@ElementCollection
-	@Enumerated(EnumType.STRING)
-	@CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
-	private Collection<Role> authorities;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
+    private Collection<Role> authorities;
 
 }
