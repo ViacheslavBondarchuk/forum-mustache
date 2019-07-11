@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,19 +29,18 @@
                 <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/discusion}">Discussion</a>
+                <a class="nav-link" th:href="@{/discussion}">Discussion</a>
             </li>
         </ul>
 
         <ul class="navbar-nav mr-0" th:align="right">
             <li class="nav-item active">
-                <a class="nav-link" href="/login">Sign In <span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/login}">Sign In <span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
 </nav>
-
-<h1 align="center">FORUM</h1>
-
+<h1 align="center"><b>FORUM</b></h1>
+<h2 align="center">Java Junior</h2>
 </body>
 </html>

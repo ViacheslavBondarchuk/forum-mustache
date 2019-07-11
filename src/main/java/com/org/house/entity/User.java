@@ -2,6 +2,7 @@ package com.org.house.entity;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -36,6 +37,9 @@ public class User implements UserDetails {
     private boolean isAccountNonLocked;
     private boolean isAccountNonExpired;
     private boolean isCredentialsNonExpired;
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Topic >topic;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)

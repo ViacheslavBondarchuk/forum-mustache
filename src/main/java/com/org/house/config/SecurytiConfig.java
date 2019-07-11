@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -21,15 +22,20 @@ public class SecurytiConfig extends WebSecurityConfigurerAdapter {
     private UserService userService;
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/registration", "/login").permitAll()
-                .anyRequest().authenticated()
-                .antMatchers("/profile").hasRole("USER")
+                    .antMatchers("/", "/registration", "/login").permitAll()
+                    .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                .and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll();
+                    .formLogin().loginPage("/login").permitAll()
+                .and()
+                .logout()
+                    .clearAuthentication(true)
+                    .invalidateHttpSession(true)
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/login?logout")
+                .permitAll();
     }
 
     @Bean
