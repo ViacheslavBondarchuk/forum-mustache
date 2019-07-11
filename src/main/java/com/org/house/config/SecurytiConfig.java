@@ -4,6 +4,7 @@ import com.org.house.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,24 +26,19 @@ public class SecurytiConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/registration", "/login").permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers("/", "/registration", "/login").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                    .formLogin().loginPage("/login").permitAll()
+                .formLogin().loginPage("/login").permitAll()
                 .and()
                 .logout()
-                    .clearAuthentication(true)
-                    .invalidateHttpSession(true)
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login?logout")
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
                 .permitAll();
     }
 
-    @Bean
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return userService;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -55,6 +51,5 @@ public class SecurytiConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userService)
                 .passwordEncoder(passwordEncoder());
     }
-
 
 }

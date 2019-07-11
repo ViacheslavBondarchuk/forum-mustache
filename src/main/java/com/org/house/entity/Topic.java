@@ -18,7 +18,7 @@ public class Topic {
     private int id;
     @Temporal(TemporalType.DATE)
     private Date date;
-    private String text;
+    private String theme;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

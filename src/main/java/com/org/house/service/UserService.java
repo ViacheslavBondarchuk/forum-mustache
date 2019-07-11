@@ -1,10 +1,12 @@
 package com.org.house.service;
 
 import com.google.common.collect.ImmutableList;
+import com.org.house.DTO.UserDTO;
 import com.org.house.entity.User;
 import com.org.house.repository.UserRepository;
 import com.org.house.role.Role;
 import lombok.extern.log4j.Log4j2;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,30 +22,26 @@ import java.util.Date;
 public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+    private ModelMapper modelMapper = new ModelMapper();
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User addUser(String email, String password, String firstName, String lastName, String username) {
-        User newUser = User.builder()
-                .username(username)
-                .firstName(firstName)
-                .lastName(lastName)
-                .email(email)
-                .password(encoder.encode(password))
-                .date(new Date())
-                .authorities(ImmutableList.of(Role.USER))
-                .isAccountNonLocked(true)
-                .isAccountNonExpired(true)
-                .isCredentialsNonExpired(true)
-                .isEnabled(true)
-                .build();
+    public User addUser(UserDTO userDTO) {
+        log.info("User was created");
 
-        log.debug("User was created");
-        return userRepository.save(newUser);
+        userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+        userDTO.setAuthorities(ImmutableList.of(Role.USER));
+        userDTO.setDate(new Date());
+        userDTO.setAccountNonExpired(true);
+        userDTO.setAccountNonLocked(true);
+        userDTO.setCredentialsNonExpired(true);
+        userDTO.setEnabled(true);
+
+        return userRepository.save(modelMapper.map(userDTO, User.class));
     }
 
     @Override
     public UserDetails loadUserByUsername(@NotNull String username) throws UsernameNotFoundException {
-        log.debug("user: " + username + " was found");
+        log.info("user: " + username + " was found");
         return userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException(username)
         );

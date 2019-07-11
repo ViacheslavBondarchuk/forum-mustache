@@ -35,6 +35,12 @@
         </ul>
 
         <ul class="navbar-nav mr-0" th:align="right">
+            <li>
+                <a class="nav-link active" th:href="@{/discussion/new}">Add discussion</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{/profile}">My Profile</a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/login">Sign In <span class="sr-only">(current)</span></a>
             </li>
@@ -53,11 +59,31 @@
     <tbody>
     <tr th:each="topic : ${topics}">
         <td><span th:text="${topic.user}"> Title </span></td>
-        <td><span th:text="${topic.text}"> Theme </span></td>
+        <td><span th:text="${topic.theme}"> Theme </span></td>
         <td><span th:text="${topic.user}"> Author </span></td>
     </tr>
     </tbody>
 </table>
+
+
+
+<div class="modal fade" id="addDiscussion" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form class="form-horizontal" method="post" id="delete_file_form">
+
+                <div class="modal-body">
+                    Are you sure you want to delete this file?
+                </div>
+
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger" name="in_confirm_insert" id="confirm-delete-button">Delete</button>
+                    <button data-dismiss="modal" class="btn btn-default" name="in_confirm_insert" id="cancel-delete-button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 </body>
