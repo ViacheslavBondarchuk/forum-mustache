@@ -42,7 +42,22 @@
     </div>
 </nav>
 <h1 th:align="center"><b>Discussions</b></h1>
-<div></div>
+<!--Topic table-->
+<div th:if="${topics.isEmpty()}" th:align="center"><span><b>No one element</b></span></div>
+<table th:align="center" class="table" th:if="${!topics.isEmpty()}">
+    <thead>
+    <th>User</th>
+    <th>Theme</th>
+    <th>Date</th>
+    </thead>
+    <tbody>
+    <tr th:each="topic : ${topics}">
+        <td><span th:text="${topic.user}"> Title </span></td>
+        <td><span th:text="${topic.text}"> Theme </span></td>
+        <td><span th:text="${topic.user}"> Author </span></td>
+    </tr>
+    </tbody>
+</table>
 
 
 </body>

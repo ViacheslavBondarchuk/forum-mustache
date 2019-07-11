@@ -37,12 +37,13 @@ public class UserService implements UserDetailsService {
                 .isEnabled(true)
                 .build();
 
-        log.info("User was created");
+        log.debug("User was created");
         return userRepository.save(newUser);
     }
 
     @Override
     public UserDetails loadUserByUsername(@NotNull String username) throws UsernameNotFoundException {
+        log.debug("user: " + username + " was found");
         return userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException(username)
         );
