@@ -1,4 +1,4 @@
-package com.org.house.role;
+	package com.org.house.role;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -7,6 +7,6 @@ public enum Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return null;
+        return name();
     }
 }
