@@ -32,6 +32,7 @@ public class DiscussionController {
     @GetMapping("/topic/{id}")
     public String getTopic(@PathVariable String id, Model model) throws NotFoundException {
         model.addAttribute("topic", discussionService.getTopic(Integer.parseInt(id)));
+        model.addAttribute("comments", discussionService.getAllComments(Integer.parseInt(id)));
         return "topic";
     }
 

@@ -41,4 +41,8 @@ public class DiscussionService {
 
         commentRepository.save(comment);
     }
+
+    public List<Comment> getAllComments(int id){
+       return commentRepository.findByTopic(id);
+    }
 }
