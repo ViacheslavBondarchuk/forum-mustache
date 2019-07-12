@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:button="http://www.w3.org/1999/html"
-      xmlns:form="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -45,53 +43,6 @@
         </ul>
     </div>
 </nav>
-
-<h1 th:align="center"><b>Discussions</b></h1>
-
-<!--Button fro modal-->
-<div th:align="right" class="mr-4">
-    <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#newDiscussion"
-            data-whatever="@getbootstrap">Create discussion
-    </button>
-</div>
-<!--Collapse Form - new discussion-->
-<div class="collapse" id="newDiscussion">
-    <div class="card card-body">
-        <form method="post" th:action="@{/discussion}" class="container">
-            <div class="form-group">
-                <label>Theme</label>
-                <input type="text" class="form-control" id="theme" name="theme">
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description"></textarea>
-            </div>
-            <input type="submit" class="btn btn-success" value="Create"/>
-        </form>
-    </div>
-</div>
-
-<!--Topic table-->
-<table class="table table-active container" th:if="${!topics.isEmpty()}">
-    <thead>
-    <tr>
-        <th> Title</th>
-        <th> Theme</th>
-        <th> Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${topics.isEmpty()}">
-        <td colspan="2"> No Topics Available</td>
-    </tr>
-    <tr th:each="topic : ${topics}" class="accordion">
-        <td><span th:text="${topic.id}"> Id </span></td>
-        <td><a class="btn btn-link" th:href="@{'/topic?id=' +${topic.id}}" th:text="${topic.theme}"/></td>
-        <td><span th:text="${topic.description}"> Description </span></td>
-    </tr>
-    </tbody>
-</table>
-
 
 </body>
 </html>
