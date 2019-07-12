@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:button="http://www.w3.org/1999/html"
+      xmlns:form="http://www.w3.org/1999/html">
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -44,5 +47,21 @@
     </div>
 </nav>
 
+<h1 th:text="'Theme: ' +  ${topic.theme}" align="center"></h1>
+<h2 th:text="'Description: ' + ${topic.description}" align="center"></h2>
+<!--Table for comments-->
+<table class="table table-active container">
+    <thead>
+    <tr>
+        <th> Comment</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${topic.comments.isEmpty()}">
+        <td colspan="2"> No comments for this topic</td>
+    </tr>
+
+    </tbody>
+</table>
 </body>
 </html>

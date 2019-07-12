@@ -2,6 +2,7 @@ package com.org.house.controller;
 
 import com.org.house.DTO.TopicDTO;
 import com.org.house.service.DiscussionService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,8 +28,8 @@ public class DiscussionController {
     }
 
     @GetMapping("/topic")
-    public String getTopic(@RequestParam(value = "id", required = true) String id){
-        System.out.println(id);
+    public String getTopic(@RequestParam(value = "id", required = true) String id, Model model) throws NotFoundException {
+        model.addAttribute("topic", discussionService.getTopic(Integer.parseInt(id)));
         return "topic";
     }
 }

@@ -3,6 +3,7 @@ package com.org.house.service;
 import com.org.house.DTO.TopicDTO;
 import com.org.house.entity.Topic;
 import com.org.house.repository.TopicRepository;
+import javassist.NotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,9 @@ public class DiscussionService {
     public void saveDiscussion(TopicDTO topicDTO) {
         topicDTO.setDate(new Date());
         topicRepository.save(modelMapper.map(topicDTO, Topic.class));
+    }
+
+    public Topic getTopic(int id) throws NotFoundException {
+        return topicRepository.findById(id).orElseThrow(() -> new NotFoundException("Topic not found"));
     }
 }

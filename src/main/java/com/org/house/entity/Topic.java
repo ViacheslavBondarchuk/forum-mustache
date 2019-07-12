@@ -25,7 +25,7 @@ public class Topic {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @OneToMany(mappedBy = "topic")
+    @OneToMany(mappedBy = "topic",fetch = FetchType.EAGER)
     private Set<Comment> comments;
 
 }
