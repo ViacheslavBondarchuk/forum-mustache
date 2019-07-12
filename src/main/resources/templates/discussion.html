@@ -71,22 +71,26 @@
     </div>
 </div>
 
-<!--Topic collapse-->
-<div class="card container" th:each="topic :${topics}">
-    <div class="card-header" id="headingTwo">
-        <h2 class="mb-0">
-            <div class="container" th:align="center">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="false" aria-controls="collapseTwo">
-                    <input th:value="${topic.theme}" class="btn btn-link" disabled/>
-                </button>
-            </div>
-        </h2>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
-        <input class="text-body" th:value="${topic.description}" disabled/>
-    </div>
-</div>
+<!--Topic table-->
+<table class="table table-active container" th:if="${!topics.isEmpty()}">
+    <thead>
+    <tr>
+        <th> Title </th>
+        <th> Theme </th>
+        <th> Description </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${topics.isEmpty()}">
+        <td colspan="2"> No Topics Available </td>
+    </tr>
+    <tr th:each="topic : ${topics}" class="accordion">
+        <td><span th:text="${topic.id}"> Id </span></td>
+        <td><input type="button" class="btn btn-link" th:value="${topic.theme}"/></td>
+        <td><span th:text="${topic.description}"> Description </span></td>
+    </tr>
+    </tbody>
+</table>
 
 
 </body>

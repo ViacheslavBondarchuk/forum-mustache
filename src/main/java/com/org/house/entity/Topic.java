@@ -6,9 +6,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
-@Entity
 @Data
+@Entity
 @Table(name = "topics")
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +21,11 @@ public class Topic {
     private Date date;
     private String theme;
     private String Description;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @OneToMany(mappedBy = "topic")
+    private Set<Comment> comments;
+
 }
