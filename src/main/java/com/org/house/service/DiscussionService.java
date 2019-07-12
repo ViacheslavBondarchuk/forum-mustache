@@ -1,7 +1,9 @@
 package com.org.house.service;
 
 import com.org.house.DTO.TopicDTO;
+import com.org.house.entity.Comment;
 import com.org.house.entity.Topic;
+import com.org.house.repository.CommentRepository;
 import com.org.house.repository.TopicRepository;
 import javassist.NotFoundException;
 import org.modelmapper.ModelMapper;
@@ -14,7 +16,9 @@ import java.util.List;
 @Service
 public class DiscussionService {
     @Autowired
-    TopicRepository topicRepository;
+    private TopicRepository topicRepository;
+    @Autowired
+    private CommentRepository commentRepository;
     private ModelMapper modelMapper = new ModelMapper();
 
     public List<Topic> getAllTopics() {
@@ -28,5 +32,13 @@ public class DiscussionService {
 
     public Topic getTopic(int id) throws NotFoundException {
         return topicRepository.findById(id).orElseThrow(() -> new NotFoundException("Topic not found"));
+    }
+
+    public void addComment(String text, int id) throws NotFoundException {
+        Comment comment = new Comment();
+        comment.setText(text);
+        comment.setTopic(topicRepository.findById(id).orElseThrow(() -> new NotFoundException("Topic not found")));
+
+        commentRepository.save(comment);
     }
 }

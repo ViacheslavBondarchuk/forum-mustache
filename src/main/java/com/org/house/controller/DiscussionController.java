@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
+
 @Controller
 public class DiscussionController {
 
@@ -27,15 +29,16 @@ public class DiscussionController {
         return "redirect:/discussion";
     }
 
-    @GetMapping("/topic")
-    public String getTopic(@RequestParam(value = "id", required = true) String id, Model model) throws NotFoundException {
+    @GetMapping("/topic/{id}")
+    public String getTopic(@PathVariable String id, Model model) throws NotFoundException {
         model.addAttribute("topic", discussionService.getTopic(Integer.parseInt(id)));
         return "topic";
     }
 
-    @PostMapping("/topic")
-    public String addComment(){
-        System.out.println("HELLO FROM TOPIC");
-        return "redirect:/topic";
+    @PostMapping("/topic/{id}")
+    public String addComment(@PathVariable String id, @NotBlank @RequestParam(value = "textComment") String text) throws NotFoundException {
+        discussionService.addComment(text, Integer.parseInt(id));
+        System.out.println("HELLO");
+        return "redirect:/topic/" + id;
     }
 }

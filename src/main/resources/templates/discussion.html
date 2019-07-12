@@ -86,7 +86,7 @@
     </tr>
     <tr th:each="topic : ${topics}" class="accordion">
         <td><span th:text="${topic.id}"> Id </span></td>
-        <td><a class="btn btn-link" th:href="@{'/topic?id=' +${topic.id}}" th:text="${topic.theme}"/></td>
+        <td><a class="btn btn-link" th:href="@{'/topic/'+${topic.id}}" th:text="${topic.theme}"/></td>
         <td><span th:text="${topic.description}"> Description </span></td>
     </tr>
     </tbody>

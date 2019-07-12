@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,6 +26,6 @@ public class Topic {
     @JoinColumn(name = "user_id")
     private User user;
     @OneToMany(mappedBy = "topic",fetch = FetchType.EAGER)
-    private Set<Comment> comments;
+    private List<Comment> comments;
 
 }
