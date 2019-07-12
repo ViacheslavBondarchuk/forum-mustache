@@ -32,4 +32,10 @@ public class DiscussionController {
         model.addAttribute("topic", discussionService.getTopic(Integer.parseInt(id)));
         return "topic";
     }
+
+    @PostMapping("/topic")
+    public String addComment(){
+        System.out.println("HELLO FROM TOPIC");
+        return "redirect:/topic";
+    }
 }

@@ -49,6 +49,26 @@
 
 <h1 th:text="'Theme: ' +  ${topic.theme}" align="center"></h1>
 <h2 th:text="'Description: ' + ${topic.description}" align="center"></h2>
+
+<!--Button for collapse-->
+<div th:align="right" class="mr-4">
+    <button type="button" class="btn btn-outline-success" data-toggle="collapse" data-target="#newDiscussion"
+            data-whatever="@getbootstrap">Add comment
+    </button>
+</div>
+<!--Collapse Form - new discussion-->
+<div class="collapse" id="newDiscussion">
+    <div class="card card-body">
+        <form method="post" th:action="@{/'topic?id=' + ${topic.id}}" class="container">
+            <div class="form-group">
+                <label for="textComment">Comment</label>
+                <textarea class="form-control" id="textComment" name="textComment"></textarea>
+            </div>
+            <input type="submit" class="btn btn-success" value="Add"/>
+        </form>
+    </div>
+</div>
+
 <!--Table for comments-->
 <table class="table table-active container">
     <thead>
